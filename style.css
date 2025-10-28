@@ -149,4 +149,36 @@ main{
 .buttons{
     display: flex;
     gap: 1rem;
+    margin: 3rem;
+}
+
+.btn-start{
+    text-decoration: none;
+    border: 1px solid #2a2a2a;
+    padding: 0.7rem , 1.2rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    transition: backgropund-color 0.2s ease;
+}
+
+.btn-start:hover{
+    background-color: #1a1a1a;
+}
+
+.btn-get{
+    text-decoration: none;
+    background-color: lightgray;
+    color: black;
+    padding: 0.6rem , 2.5rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    transition: backgropund-color 0.2s ease;
+}
+
+.btn-get:hover{
+    background-color: gray;
 }
