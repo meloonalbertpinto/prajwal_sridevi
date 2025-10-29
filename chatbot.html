@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voice & Text AI Demo</title>
+    <title>Voice AI Demo - SRIDEVI</title>
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts for a nice, clean look -->
@@ -11,25 +11,27 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom styles to enhance the look and feel */
+        /* Custom styles to match your theme */
         body {
             font-family: 'Inter', sans-serif;
-        }
-        .app-container {
+            background-color: #000;
+            color: #e7e7e7;
             min-height: 100vh;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         }
+
+        /* Dark card style from your theme */
         .card {
-            background-color: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: #111827; /* bg-gray-900 - Changed from #0f0f0f */
+            border: 1px solid #2a2a2a;
         }
-        .btn-primary {
-            @apply px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-transform transform hover:scale-105;
+
+        /* Purple glow text from your theme */
+        .purple-glow-text {
+            color: #c084fc; /* text-purple-400 */
+            text-shadow: 0 0 8px rgba(192, 132, 252, 0.7), 0 0 12px rgba(192, 132, 252, 0.5);
         }
-        .btn-secondary {
-            @apply px-6 py-3 bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75 transition-transform transform hover:scale-105;
-        }
+        
+        /* Status dot animation - now with purple glow */
         .status-dot {
             width: 12px;
             height: 12px;
@@ -38,21 +40,16 @@
             animation: pulse 1.5s infinite;
         }
         @keyframes pulse {
-            0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
-            100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+            0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(192, 132, 252, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(192, 132, 252, 0); }
+            100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(192, 132, 252, 0); }
         }
         .not-listening {
             animation: none;
             background-color: #718096; /* gray-500 */
         }
-        /* Chatbot specific styles */
-        .chat-bubble-user {
-            @apply bg-blue-500 text-white self-end;
-        }
-        .chat-bubble-bot {
-            @apply bg-gray-200 text-gray-800 self-start;
-        }
+        
+        /* Typing indicator dots - now purple */
         .typing-indicator {
             display: none; /* Hidden by default */
             align-items: center;
@@ -61,7 +58,7 @@
             height: 8px;
             width: 8px;
             margin: 0 2px;
-            background-color: #9ca3af;
+            background-color: #c084fc; /* purple-400 */
             border-radius: 50%;
             display: inline-block;
             animation: bounce 1.4s infinite ease-in-out both;
@@ -72,77 +69,94 @@
             0%, 80%, 100% { transform: scale(0); }
             40% { transform: scale(1.0); }
         }
+
+        /* NOTE: The @apply rules for buttons and chat bubbles
+           have been REMOVED from here and placed as 
+           Tailwind classes in the HTML to ensure they work.
+        */
     </style>
 </head>
-<body class="app-container antialiased text-gray-800">
+<body class="antialiased text-gray-100">
 
     <div class="container mx-auto p-4 md:p-8">
         <header class="text-center mb-10">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-900">Voice AI Demo</h1>
-            <p class="text-lg text-gray-600 mt-2">Voice Recognition, Speech Synthesis, and an Emotional AI Chatbot.</p>
+            <h1 class="text-4xl md:text-5xl font-bold purple-glow-text">Voice AI Demo</h1>
+            <p class="text-lg text-gray-400 mt-2">Voice Recognition, Speech Synthesis, and an Emotional AI Chatbot.</p>
         </header>
 
         <main class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
             <!-- Voice-to-Text Card -->
-            <div class="card p-6 rounded-2xl shadow-lg">
+            <!-- MODIFIED: Changed p-6 to p-8 -->
+            <div class="card p-8 rounded-2xl shadow-lg">
                 <h2 class="text-2xl font-bold mb-4 flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-purple-400"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
                     Voice-to-Text
                 </h2>
                 <div class="space-y-4">
                     <div class="flex items-center space-x-4">
-                        <button id="start-listen-btn" class="btn-primary flex-1">Start Listening</button>
-                        <button id="stop-listen-btn" class="btn-secondary flex-1" disabled>Stop Listening</button>
+                        <!-- MODIFIED: bg-gray-200 -> bg-gray-100, hover:bg-white -> hover:bg-gray-200 -->
+                        <button id="start-listen-btn" class="flex-1 px-6 py-3 bg-gray-100 text-black font-semibold rounded-lg shadow-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-75 transition-transform transform hover:scale-105">Start Listening</button>
+                        <!-- Restyled to match "Documentation" button -->
+                        <button id="stop-listen-btn" class="flex-1 px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-75 transition-transform transform hover:scale-105 border border-gray-700" disabled>Stop Listening</button>
                         <div id="status-indicator" class="status-dot not-listening" title="Not Listening"></div>
                     </div>
-                    <div id="transcript-container" class="w-full h-48 p-4 bg-gray-100 rounded-lg border border-gray-200 overflow-y-auto">
-                        <p id="interim-transcript" class="text-gray-500"></p>
-                        <p id="final-transcript" class="text-gray-800 font-medium"></p>
+                    <div id="transcript-container" class="w-full h-48 p-4 bg-gray-800 rounded-lg border border-gray-700 overflow-y-auto">
+                        <p id="interim-transcript" class="text-gray-400"></p>
+                        <p id="final-transcript" class="text-gray-100 font-medium"></p>
                     </div>
                 </div>
-                <div id="v2t-error" class="text-red-500 mt-2 text-sm"></div>
+                <!-- MODIFIED: text-red-500 -> text-red-600 -->
+                <div id="v2t-error" class="text-red-600 mt-2 text-sm"></div>
             </div>
 
             <!-- Text-to-Voice Card -->
-            <div class="card p-6 rounded-2xl shadow-lg">
+            <!-- MODIFIED: Changed p-6 to p-8 -->
+            <div class="card p-8 rounded-2xl shadow-lg">
                 <h2 class="text-2xl font-bold mb-4 flex items-center">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-purple-400"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
                     Text-to-Voice
                 </h2>
                 <div class="space-y-4">
-                    <textarea id="text-to-speak-input" class="w-full h-32 p-4 bg-gray-100 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Type or paste text here..."></textarea>
+                    <textarea id="text-to-speak-input" class="w-full h-32 p-4 bg-gray-800 rounded-lg border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Type or paste text here..."></textarea>
                     <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
-                        <select id="voice-select" class="w-full sm:w-auto flex-1 p-3 rounded-lg border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"></select>
-                        <button id="speak-btn" class="btn-primary w-full sm:w-auto">Speak Text</button>
+                        <!-- MODIFIED: Replaced sm:w-auto with sm:flex-1 and sm:min-w-0 -->
+                        <select id="voice-select" class="w-full sm:flex-1 sm:min-w-0 p-3 rounded-lg border border-gray-700 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"></select>
+                        <!-- MODIFIED: bg-gray-200 -> bg-gray-100, hover:bg-white -> hover:bg-gray-200 -->
+                        <button id="speak-btn" class="w-full sm:w-auto px-6 py-3 bg-gray-100 text-black font-semibold rounded-lg shadow-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-75 transition-transform transform hover:scale-105">Speak Text</button>
                     </div>
                 </div>
-                 <div id="t2v-error" class="text-red-500 mt-2 text-sm"></div>
+                 <!-- MODIFIED: text-red-500 -> text-red-600 -->
+                 <div id="t2v-error" class="text-red-600 mt-2 text-sm"></div>
             </div>
 
             <!-- Chatbot Card -->
-            <div class="card p-6 rounded-2xl shadow-lg flex flex-col">
+            <!-- MODIFIED: Changed p-6 to p-8 -->
+            <div class="card p-8 rounded-2xl shadow-lg flex flex-col">
                 <h2 class="text-2xl font-bold mb-4 flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-4 4s1.78 4 4 4c0 2.22-1.78 4-4 4Z"></path><path d="M12 20.94c-1.5 0-2.75 1.06-4 1.06-3 0-6-8-6-12.22A4.91 4.91 0 0 1 7 5c2.22 0 4 1.44 4 4s-1.78 4-4 4c0 2.22 1.78 4 4 4Z"></path></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-purple-400"><path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-4 4s1.78 4 4 4c0 2.22-1.78 4-4 4Z"></path><path d="M12 20.94c-1.5 0-2.75 1.06-4 1.06-3 0-6-8-6-12.22A4.91 4.91 0 0 1 7 5c2.22 0 4 1.44 4 4s-1.78 4-4 4c0 2.22 1.78 4 4 4Z"></path></svg>
                     Emotional AI Chatbot
                 </h2>
                 <div class="mb-4">
-                    <label for="api-key-input" class="text-sm font-medium text-gray-700">Google AI API Key</label>
-                    <input type="password" id="api-key-input" class="w-full mt-1 p-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter your API key here">
+                    <label for="api-key-input" class="text-sm font-medium text-gray-300">Google AI API Key</label>
+                    <input type="password" id="api-key-input" class="w-full mt-1 p-2 rounded-lg border border-gray-700 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Enter your API key here">
                     <p class="text-xs text-gray-500 mt-1">Your key is needed to run the bot locally.</p>
                 </div>
-                <div id="chat-window" class="flex-1 w-full h-48 p-4 bg-gray-100 rounded-lg border border-gray-200 overflow-y-auto flex flex-col space-y-2 mb-4">
+                <!-- MODIFIED: Removed 'flex-1' class to ensure 'h-48' and 'overflow-y-auto' work correctly -->
+                <div id="chat-window" class="w-full h-48 p-4 bg-gray-800 rounded-lg border border-gray-700 overflow-y-auto flex flex-col space-y-2 mb-4">
                     <!-- Chat messages will appear here -->
                 </div>
                 <div class="typing-indicator" id="typing-indicator">
-                    <span class="text-sm text-gray-500 mr-2">Bot is typing</span>
+                    <span class="text-sm text-gray-400 mr-2">Bot is typing</span>
                     <span></span><span></span><span></span>
                 </div>
                 <div class="flex items-center space-x-2 mt-2">
-                    <input type="text" id="chat-input" class="flex-1 w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Type a message...">
-                    <button id="send-btn" class="btn-primary">Send</button>
+                    <input type="text" id="chat-input" class="flex-1 w-full p-3 rounded-lg border border-gray-700 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Type a message...">
+                    <!-- MODIFIED: bg-gray-200 -> bg-gray-100, hover:bg-white -> hover:bg-gray-200 -->
+                    <button id="send-btn" class="px-6 py-3 bg-gray-100 text-black font-semibold rounded-lg shadow-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-75 transition-transform transform hover:scale-105">Send</button>
                 </div>
-                 <div id="chatbot-error" class="text-red-500 mt-2 text-sm"></div>
+                 <!-- MODIFIED: text-red-500 -> text-red-600 -->
+                 <div id="chatbot-error" class="text-red-600 mt-2 text-sm"></div>
             </div>
         </main>
     </div>
@@ -162,25 +176,82 @@
             const v2tErrorEl = document.getElementById('v2t-error');
             let recognition;
             let isListening = false; // Flag to control listening state
+            let finalTranscript = ''; 
+            let speechPauseTimer = null; // Timer to detect pause in speech
 
+            // --- Text-to-Voice Elements and Logic ---
+            const textToSpeakInput = document.getElementById('text-to-speak-input');
+            const voiceSelect = document.getElementById('voice-select');
+            const speakBtn = document.getElementById('speak-btn');
+            const t2vErrorEl = document.getElementById('t2v-error');
+            let voices = [];
+
+            // --- Chatbot Elements and Logic ---
+            const chatWindow = document.getElementById('chat-window');
+            const chatInput = document.getElementById('chat-input');
+            const sendBtn = document.getElementById('send-btn');
+            const chatbotErrorEl = document.getElementById('chatbot-error');
+            const typingIndicator = document.getElementById('typing-indicator');
+            const apiKeyInput = document.getElementById('api-key-input');
+            let chatHistory = []; // Stores the conversation history
+            
+            // --- NEW: State flag to prevent feedback loop ---
+            let isBotSpeaking = false;
+
+            
+            // --- Core Chatbot Function (Refactored) ---
+            
+            /**
+             * Processes a new message (from text input OR speech)
+             * and triggers the AI response.
+             */
+            async function processNewMessage(message) {
+                if (message === '') {
+                    chatbotErrorEl.textContent = 'Please type or say a message.';
+                    return;
+                }
+                
+                // 1. Add user message to chat window
+                addMessageToChat(message, 'user');
+                
+                // 2. Add user message to history
+                chatHistory.push({ role: "user", parts: [{ text: message }] }); 
+
+                // 3. Get the bot response
+                const botMessage = await getAIResponse(); // This function already shows/hides typing indicator
+                
+                // 4. Add bot response to chat window
+                addMessageToChat(botMessage, 'bot');
+                
+                // 5. Add bot response to history
+                chatHistory.push({ role: "model", parts: [{ text: botMessage }] }); 
+                
+                // 6. Populate the Text-to-Voice input
+                textToSpeakInput.value = botMessage;
+
+                // 7. Speak the bot's response
+                speakText(botMessage); 
+            }
+
+            // --- Voice-to-Text Implementation ---
             if (SpeechRecognition) {
                 recognition = new SpeechRecognition();
                 recognition.continuous = true;
                 recognition.interimResults = true;
                 recognition.lang = 'en-US';
 
-                let finalTranscript = '';
-
                 recognition.onstart = () => {
                     startBtn.disabled = true;
                     stopBtn.disabled = false;
                     statusIndicator.classList.remove('not-listening');
-                    statusIndicator.classList.add('bg-red-500');
+                    statusIndicator.classList.add('bg-purple-500'); // Changed to purple
                     statusIndicator.setAttribute('title', 'Listening...');
                     v2tErrorEl.textContent = '';
                 };
 
                 recognition.onresult = (event) => {
+                    clearTimeout(speechPauseTimer); // Reset pause timer on new speech result
+
                     let interimTranscript = '';
                     for (let i = event.resultIndex; i < event.results.length; ++i) {
                         if (event.results[i].isFinal) {
@@ -191,9 +262,28 @@
                     }
                     finalTranscriptEl.textContent = finalTranscript;
                     interimTranscriptEl.textContent = interimTranscript;
+
+                    // Set a timer to trigger chatbot after a pause
+                    if (isListening) {
+                        speechPauseTimer = setTimeout(() => {
+                            console.log('User paused, sending to chatbot.');
+                            const textToSend = finalTranscript.trim();
+                            
+                            if (textToSend) {
+                                // Clear transcripts for the next utterance
+                                finalTranscript = '';
+                                finalTranscriptEl.textContent = '';
+                                interimTranscriptEl.textContent = '';
+                                
+                                // Trigger the chat logic with the spoken text
+                                processNewMessage(textToSend); 
+                            }
+                        }, 3000); // 3-second pause (you can change 3000 to 5000 for 5 seconds)
+                    }
                 };
                 
                 recognition.onerror = (event) => {
+                    clearTimeout(speechPauseTimer); // Clear timer on error
                     console.error('Speech recognition error:', event.error);
                     if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
                         v2tErrorEl.textContent = `Error: ${event.error}. Please check microphone permissions.`;
@@ -202,33 +292,46 @@
                     }
                 };
 
+                // MODIFIED: Added check for isBotSpeaking
                 recognition.onend = () => {
-                   if (isListening) {
-                       console.log('Recognition service ended, restarting for continuous dictation.');
-                       recognition.start();
+                   if (isListening && !isBotSpeaking) {
+                        console.log('Recognition service ended, restarting for continuous dictation.');
+                        recognition.start();
+                   } else if (isBotSpeaking) {
+                         console.log('Recognition intentionally stopped while bot is speaking.');
+                         stopRecognition(); // Ensure UI is correct
                    } else {
-                       stopRecognition();
+                        stopRecognition();
                    }
                 };
                 
                 function stopRecognition() {
+                    clearTimeout(speechPauseTimer); // Clear timer when stopping manually
                     startBtn.disabled = false;
                     stopBtn.disabled = true;
                     statusIndicator.classList.add('not-listening');
-                    statusIndicator.classList.remove('bg-red-500');
+                    statusIndicator.classList.remove('bg-purple-500'); // Changed to purple
                     statusIndicator.setAttribute('title', 'Not Listening');
                 }
 
                 startBtn.addEventListener('click', () => {
-                    finalTranscript = finalTranscriptEl.textContent; 
-                    if (finalTranscript) finalTranscript += ' ';
+                    // MODIFIED: Clear transcripts when starting a new session
+                    finalTranscript = ''; 
+                    finalTranscriptEl.textContent = '';
+                    interimTranscriptEl.textContent = '';
                     isListening = true;
                     recognition.start();
                 });
 
+                // MODIFIED: Made Stop button more robust
                 stopBtn.addEventListener('click', () => {
+                    clearTimeout(speechPauseTimer); // Stop any pending pause-triggers
                     isListening = false;
-                    recognition.stop();
+                    isBotSpeaking = false;
+                    speechSynthesis.cancel(); // Stop any bot speech
+                    if (recognition) {
+                        recognition.stop();
+                    }
                 });
 
             } else {
@@ -238,13 +341,7 @@
             }
 
 
-            // --- Text-to-Voice Elements and Logic ---
-            const textToSpeakInput = document.getElementById('text-to-speak-input');
-            const voiceSelect = document.getElementById('voice-select');
-            const speakBtn = document.getElementById('speak-btn');
-            const t2vErrorEl = document.getElementById('t2v-error');
-            let voices = [];
-
+            // --- Text-to-Voice Implementation ---
             function populateVoiceList() {
                 voices = speechSynthesis.getVoices();
                 voiceSelect.innerHTML = '';
@@ -264,28 +361,50 @@
                 });
             }
             
+            // MODIFIED: This function now controls the start/stop of recognition
             function speakText(text, onEndCallback) {
                  if (speechSynthesis.speaking) {
-                    console.error('SpeechSynthesis is already speaking. Cancelling previous utterance.');
-                    speechSynthesis.cancel();
-                }
+                      console.error('SpeechSynthesis is already speaking. Cancelling previous utterance.');
+                      speechSynthesis.cancel();
+                 }
+
+                 isBotSpeaking = true; // Set flag: Bot is starting to speak
+                 if (isListening && recognition) {
+                     console.log("Stopping recognition to speak...");
+                     clearTimeout(speechPauseTimer); // Stop any pending pause-triggers
+                     recognition.stop();
+                 }
                 
-                setTimeout(() => {
-                    const utterance = new SpeechSynthesisUtterance(text);
-                    const selectedOption = voiceSelect.selectedOptions[0]?.getAttribute('data-name');
-                    const selectedVoice = voices.find(voice => voice.name === selectedOption);
-                    utterance.voice = selectedVoice;
-                    utterance.onend = () => {
-                        if (onEndCallback) {
-                            onEndCallback();
-                        }
-                    };
-                    utterance.onerror = (event) => {
-                         console.error('SpeechSynthesisUtterance.onerror', event);
-                         t2vErrorEl.textContent = `An error occurred during speech synthesis: ${event.error}`;
-                    }
-                    speechSynthesis.speak(utterance);
-                }, 100);
+                 setTimeout(() => {
+                     const utterance = new SpeechSynthesisUtterance(text);
+                     const selectedOption = voiceSelect.selectedOptions[0]?.getAttribute('data-name');
+                     const selectedVoice = voices.find(voice => voice.name === selectedOption);
+                     utterance.voice = selectedVoice;
+                     
+                     utterance.onend = () => {
+                          console.log("Speech finished.");
+                          isBotSpeaking = false; // Clear flag: Bot is done speaking
+                          if (isListening && recognition) {
+                             console.log("Restarting recognition...");
+                             recognition.start(); // Restart listening
+                          }
+                          if (onEndCallback) {
+                              onEndCallback();
+                          }
+                     };
+                     
+                     utterance.onerror = (event) => {
+                          console.error('SpeechSynthesisUtterance.onerror', event);
+                          t2vErrorEl.textContent = `An error occurred during speech synthesis: ${event.error}`;
+                          isBotSpeaking = false; // Clear flag even on error
+                          if (isListening && recognition) {
+                             console.log("Restarting recognition after speech error...");
+                             recognition.start(); // Restart listening
+                          }
+                     }
+                     
+                     speechSynthesis.speak(utterance);
+                 }, 100);
             }
 
             if (speechSynthesis) {
@@ -301,26 +420,19 @@
                         return;
                     }
                     t2vErrorEl.textContent = '';
-                    speakText(text);
+                    speakText(text); // This will now pause recognition
                 });
             } else {
                 speakBtn.disabled = true;
                 t2vErrorEl.textContent = "Sorry, your browser doesn't support the Web Speech API for speech synthesis.";
             }
 
-            // --- Chatbot Elements and Logic ---
-            const chatWindow = document.getElementById('chat-window');
-            const chatInput = document.getElementById('chat-input');
-            const sendBtn = document.getElementById('send-btn');
-            const chatbotErrorEl = document.getElementById('chatbot-error');
-            const typingIndicator = document.getElementById('typing-indicator');
-            const apiKeyInput = document.getElementById('api-key-input');
-            let chatHistory = []; // Stores the conversation history
-
+            // --- Chatbot Implementation ---
             function addMessageToChat(message, sender) {
                 const bubble = document.createElement('div');
                 bubble.textContent = message;
-                bubble.className = `p-3 rounded-lg max-w-xs lg:max-w-md break-words ${sender === 'user' ? 'chat-bubble-user' : 'chat-bubble-bot'}`;
+                // Classes are now applied directly based on your theme
+                bubble.className = `p-3 rounded-lg max-w-xs lg:max-w-md break-words ${sender === 'user' ? 'bg-purple-600 text-white self-end' : 'bg-gray-700 text-gray-100 self-start'}`;
                 chatWindow.appendChild(bubble);
                 chatWindow.scrollTop = chatWindow.scrollHeight; // Auto-scroll to the bottom
             }
@@ -334,6 +446,7 @@
 
                 typingIndicator.style.display = 'flex';
                 sendBtn.disabled = true;
+                chatInput.disabled = true; // Disable input while bot is thinking
                 chatbotErrorEl.textContent = '';
 
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
@@ -381,25 +494,22 @@
                 } finally {
                     typingIndicator.style.display = 'none';
                     sendBtn.disabled = false;
+                    chatInput.disabled = false; // Re-enable input
                     chatInput.focus();
                 }
             }
-
-            async function handleSendMessage() {
+            
+            /**
+             * Handles the manual "Send" button click
+             */
+            function handleSendMessage() {
                 const message = chatInput.value.trim();
-                if (message === '') {
+                if (message) {
+                    chatInput.value = ''; // Clear the input box immediately
+                    processNewMessage(message); // Call the new core function
+                } else {
                     chatbotErrorEl.textContent = 'Please type a message.';
-                    return;
                 }
-                
-                addMessageToChat(message, 'user');
-                chatHistory.push({ role: "user", parts: [{ text: message }] }); // Add user message to history
-                chatInput.value = '';
-
-                const botMessage = await getAIResponse();
-                addMessageToChat(botMessage, 'bot');
-                chatHistory.push({ role: "model", parts: [{ text: botMessage }] }); // Add bot response to history
-                speakText(botMessage); // Speak the bot's response
             }
             
             sendBtn.addEventListener('click', handleSendMessage);
@@ -410,14 +520,15 @@
             });
 
              // Add a welcome message from the bot on load and to the history
-            setTimeout(() => {
-                const welcomeMessage = "Hello! I'm here to listen. How are you feeling today?";
-                addMessageToChat(welcomeMessage, 'bot');
-                chatHistory.push({ role: "model", parts: [{ text: welcomeMessage }] });
-            }, 500);
+             setTimeout(() => {
+                 const welcomeMessage = "Hello! I'm here to listen. How are you feeling today? You can talk to me or type a message.";
+                 addMessageToChat(welcomeMessage, 'bot');
+                 chatHistory.push({ role: "model", parts: [{ text: welcomeMessage }] });
+             }, 500);
 
         });
     </script>
 </body>
 </html>
+
 
