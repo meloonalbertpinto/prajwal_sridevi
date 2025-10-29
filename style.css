@@ -64,6 +64,7 @@ nav a{
     transition: color 0.2s ease;
     text-decoration: none;
     color: inherit;
+    cursor: pointer;
 }
 nav a:hover{
     color: #a7a7a7;
@@ -152,33 +153,103 @@ main{
     margin: 3rem;
 }
 
+
 .btn-start{
-    text-decoration: none;
-    border: 1px solid #2a2a2a;
-    padding: 0.7rem , 1.2rem;
-    border-radius: 50px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    letter-spacing: 0.1rem;
-    transition: backgropund-color 0.2s ease;
+ text-decoration: none;
+ border: 1px solid #2a2a2a;
+ padding: 0.7rem 1.2rem; 
+ border-radius: 50px;
+ font-size: 1.2rem;
+ font-weight: 600;
+ letter-spacing: 0.1rem;
+ transition: background-color 0.2s ease; 
 }
 
 .btn-start:hover{
-    background-color: #1a1a1a;
+ background-color: #1a1a1a;
 }
 
 .btn-get{
-    text-decoration: none;
-    background-color: lightgray;
-    color: black;
-    padding: 0.6rem , 2.5rem;
-    border-radius: 50px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    letter-spacing: 0.1rem;
-    transition: backgropund-color 0.2s ease;
+text-decoration: none;
+background-color: lightgray;
+color: black;
+padding: 0.6rem 2.5rem; 
+border-radius: 50px;
+font-size: 1.2rem;
+font-weight: 600;
+letter-spacing: 0.1rem;
+transition: background-color 0.2s ease; 
 }
+
 
 .btn-get:hover{
     background-color: gray;
+}
+
+.robot{
+    scale: 2;
+    position: absolute;
+    top: 0;
+    right: -20%;
+    z-index: -1;
+}
+
+@media(max-width: 1300px){
+    header{
+        padding: 1rem 0.5rem;
+    }
+    .content{
+        margin-top: 85%;
+    }
+    .robot{
+        scale: 0.8;
+        top: -20%;
+        right: 2%;
+    }
+}
+
+/* Mobile Styles */
+@media(max-width: 768px){
+    /* nav{
+        display: none;
+    } */
+    header{
+        padding: 1rem 0.1rem;
+    }
+    header h1{
+        font-size: 2rem;
+    }
+    .btn-start{
+        padding: 0.6rem , 1.5rem;
+    }
+    .content{
+        margin-top: 25rem;
+    }
+    robot{
+        scale: 0.5;
+        top: -25%;
+        right: 0;
+    }
+    .content{
+        max-width: 30rem;
+        margin-left: 10%;
+    }
+    .tag-box{
+        width: 12rem;
+    }
+    .content h1{
+        font-size: 2.5rem;
+    }
+    .description{
+        font-size: 1rem;
+    }
+    .btn-start{
+        font-size: 0.8rem;
+        padding: 0.5rem, 1.2 rem;
+    }
+    .btn-get{
+        font-size: 0.8rem;
+        padding: 0.8rem, 2 rem;
+
+    }
 }

@@ -1,57 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <title>Voice-to-Text & Text-to-Voice Demo</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for a nice, clean look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles to enhance the look and feel */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .app-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .btn-primary {
+            @apply px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-transform transform hover:scale-105;
+        }
+        .btn-secondary {
+            @apply px-6 py-3 bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75 transition-transform transform hover:scale-105;
+        }
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+        .not-listening {
+            animation: none;
+            background-color: #718096; /* gray-500 */
+        }
+    </style>
 </head>
+<body class="app-container antialiased text-gray-800">
 
-<body>
-    <img class="image-gradient" src="gradient.png" alt="gradient">
-    <div class="layer-blur"></div>
-    <div class="container">
-        <header>
-            <h1 style="font-weight: 650;" data-aos="fade-down" data-aos-duration="1500" class="logo">EVA</h1>
-            <nav>
-                <a data-aos="fade-down" data-aos-duration="1500" href="./home.html">Home</a>
-                <a data-aos="fade-down" data-aos-duration="2000" href="./index.html">Voice to Text</a>
-                <a data-aos="fade-down" data-aos-duration="2500" href="./chatbot.html">ChatBot</a>
-                <a data-aos="fade-down" data-aos-duration="3000" href="./help.html">Help</a>
-            </nav>
-
-            <button class="sign-in">SIGNING IN</button>
-
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900">Voice AI Demo</h1>
+            <p class="text-lg text-gray-600 mt-2">Using the Web Speech API for voice recognition and synthesis.</p>
         </header>
-        <main>
-            <div data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0"
-                data-aos-duration="3000" class="content">
-                <div class="tag-box">
-                    <div class="tag">INTRODUCING EVA &wedbar;</div>
+
+        <main class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- Voice-to-Text Card -->
+            <div class="card p-6 rounded-2xl shadow-lg">
+                <h2 class="text-2xl font-bold mb-4 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
+                    Voice-to-Text
+                </h2>
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-4">
+                        <button id="start-listen-btn" class="btn-primary flex-1">Start Listening</button>
+                        <button id="stop-listen-btn" class="btn-secondary flex-1" disabled>Stop Listening</button>
+                        <div id="status-indicator" class="status-dot not-listening" title="Not Listening"></div>
+                    </div>
+                    <div id="transcript-container" class="w-full h-48 p-4 bg-gray-100 rounded-lg border border-gray-200 overflow-y-auto">
+                        <p id="interim-transcript" class="text-gray-500"></p>
+                        <p id="final-transcript" class="text-gray-800 font-medium"></p>
+                    </div>
                 </div>
-                <h1>Your Everyday <br> Companion</h1>
+                <div id="v2t-error" class="text-red-500 mt-2 text-sm"></div>
+            </div>
 
-                <p class="discription">
-                    This is our emotion bot which will be there for you and be like a friend for u during your good and
-                    bad times.
-                </p>
-
-                <div class="buttons">
-                    <a href="https://www.canva.com/design/DAG3DQegpiU/g-xrd7gRyKB032jqd8hLGg/edit?utm_content=DAG3DQegpiU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="btn-start">Documentation &gt;</a>
-                    <a href="bot.html" class="btn-get">Connect EVA &gt;</a>
-
+            <!-- Text-to-Voice Card -->
+            <div class="card p-6 rounded-2xl shadow-lg">
+                <h2 class="text-2xl font-bold mb-4 flex items-center">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
+                    Text-to-Voice
+                </h2>
+                <div class="space-y-4">
+                    <textarea id="text-to-speak-input" class="w-full h-32 p-4 bg-gray-100 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Type or paste text here..."></textarea>
+                    <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                        <select id="voice-select" class="w-full sm:w-auto flex-1 p-3 rounded-lg border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"></select>
+                        <button id="speak-btn" class="btn-primary w-full sm:w-auto">Speak Text</button>
+                    </div>
                 </div>
+                 <div id="t2v-error" class="text-red-500 mt-2 text-sm"></div>
             </div>
         </main>
-        <spline-viewer class="robot" url="https://prod.spline.design/k4MBvGZYTHhHnqlU/scene.splinecode"></spline-viewer>
     </div>
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.88/build/spline-viewer.js"></script>
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
     <script>
-        AOS.init();
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check for browser support for Web Speech API
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const speechSynthesis = window.speechSynthesis;
+
+            // --- Voice-to-Text Elements and Logic ---
+            const startBtn = document.getElementById('start-listen-btn');
+            const stopBtn = document.getElementById('stop-listen-btn');
+            const statusIndicator = document.getElementById('status-indicator');
+            const interimTranscriptEl = document.getElementById('interim-transcript');
+            const finalTranscriptEl = document.getElementById('final-transcript');
+            const v2tErrorEl = document.getElementById('v2t-error');
+            let recognition;
+            let isListening = false; // Flag to control listening state
+
+            if (SpeechRecognition) {
+                recognition = new SpeechRecognition();
+                recognition.continuous = true;
+                recognition.interimResults = true;
+                recognition.lang = 'en-US';
+
+                let finalTranscript = '';
+
+                recognition.onstart = () => {
+                    startBtn.disabled = true;
+                    stopBtn.disabled = false;
+                    statusIndicator.classList.remove('not-listening');
+                    statusIndicator.classList.add('bg-red-500');
+                    statusIndicator.setAttribute('title', 'Listening...');
+                    v2tErrorEl.textContent = '';
+                };
+
+                recognition.onresult = (event) => {
+                    let interimTranscript = '';
+                    for (let i = event.resultIndex; i < event.results.length; ++i) {
+                        if (event.results[i].isFinal) {
+                            finalTranscript += event.results[i][0].transcript + ' ';
+                        } else {
+                            interimTranscript += event.results[i][0].transcript;
+                        }
+                    }
+                    finalTranscriptEl.textContent = finalTranscript;
+                    interimTranscriptEl.textContent = interimTranscript;
+                };
+                
+                recognition.onerror = (event) => {
+                    console.error('Speech recognition error:', event.error);
+                    // Certain errors are not fatal. We can let the 'onend' event handle restarting.
+                    // For example, 'no-speech' happens if you pause for too long.
+                    if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+                        // These are fatal errors. User has denied permissions or the service is unavailable.
+                        v2tErrorEl.textContent = `Error: ${event.error}. Please check microphone permissions.`;
+                        isListening = false; // This will prevent onend from restarting.
+                        stopRecognition();
+                    } else {
+                        // For other errors like 'no-speech' or 'network', we don't need to do anything here.
+                        // The 'onend' event will fire next and will automatically restart the service
+                        // because 'isListening' is still true.
+                    }
+                };
+
+                recognition.onend = () => {
+                   // This event fires when recognition ends, either intentionally or because of a timeout/non-fatal error.
+                   // If 'isListening' is still true, it means we should restart it to keep listening.
+                   if (isListening) {
+                       console.log('Recognition service ended, restarting for continuous dictation.');
+                       recognition.start();
+                   } else {
+                       // This will be called if the user clicks "Stop Listening" or a fatal error occurs.
+                       stopRecognition();
+                   }
+                };
+                
+                function stopRecognition() {
+                    startBtn.disabled = false;
+                    stopBtn.disabled = true;
+                    statusIndicator.classList.add('not-listening');
+                    statusIndicator.classList.remove('bg-red-500');
+                    statusIndicator.setAttribute('title', 'Not Listening');
+                }
+
+                startBtn.addEventListener('click', () => {
+                    finalTranscript = finalTranscriptEl.textContent; // Persist previous transcript
+                    if (finalTranscript) finalTranscript += ' ';
+                    isListening = true;
+                    recognition.start();
+                });
+
+                stopBtn.addEventListener('click', () => {
+                    isListening = false;
+                    recognition.stop();
+                });
+
+            } else {
+                startBtn.disabled = true;
+                stopBtn.disabled = true;
+                v2tErrorEl.textContent = "Sorry, your browser doesn't support the Web Speech API for voice recognition.";
+            }
+
+
+            // --- Text-to-Voice Elements and Logic ---
+            const textToSpeakInput = document.getElementById('text-to-speak-input');
+            const voiceSelect = document.getElementById('voice-select');
+            const speakBtn = document.getElementById('speak-btn');
+            const t2vErrorEl = document.getElementById('t2v-error');
+            let voices = [];
+
+            function populateVoiceList() {
+                voices = speechSynthesis.getVoices();
+                voiceSelect.innerHTML = '';
+                if(voices.length === 0) {
+                     voiceSelect.innerHTML = '<option>No voices available</option>';
+                     return;
+                }
+                voices.forEach((voice, i) => {
+                    const option = document.createElement('option');
+                    option.textContent = `${voice.name} (${voice.lang})`;
+                    if (voice.default) {
+                        option.textContent += ' — DEFAULT';
+                    }
+                    option.setAttribute('data-lang', voice.lang);
+                    option.setAttribute('data-name', voice.name);
+                    voiceSelect.appendChild(option);
+                });
+            }
+
+            if (speechSynthesis) {
+                populateVoiceList();
+                if (speechSynthesis.onvoiceschanged !== undefined) {
+                    speechSynthesis.onvoiceschanged = populateVoiceList;
+                }
+
+                speakBtn.addEventListener('click', () => {
+                    const text = textToSpeakInput.value;
+                    if (text.trim() === '') {
+                        t2vErrorEl.textContent = 'Please enter some text to speak.';
+                        return;
+                    }
+                    
+                    if (speechSynthesis.speaking) {
+                        console.error('SpeechSynthesis.speaking');
+                        return;
+                    }
+
+                    t2vErrorEl.textContent = '';
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    const selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
+                    const selectedVoice = voices.find(voice => voice.name === selectedOption);
+                    utterance.voice = selectedVoice;
+
+                    utterance.onerror = (event) => {
+                         console.error('SpeechSynthesisUtterance.onerror', event);
+                         t2vErrorEl.textContent = `An error occurred during speech synthesis: ${event.error}`;
+                    }
+
+                    speechSynthesis.speak(utterance);
+                });
+            } else {
+                speakBtn.disabled = true;
+                t2vErrorEl.textContent = "Sorry, your browser doesn't support the Web Speech API for speech synthesis.";
+            }
+        });
     </script>
 </body>
-
 </html>
+
