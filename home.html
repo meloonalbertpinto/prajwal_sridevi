@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 
 <body>
@@ -14,23 +14,24 @@
     <div class="layer-blur"></div>
     <div class="container">
         <header>
-            <h1 class="logo">SRIDEVI</h1>
+            <h1 style="font-weight: 650;" data-aos="fade-down" data-aos-duration="1500" class="logo">EVA</h1>
             <nav>
-                <a href="#">Home</a>
-                <a href="#">About</a>
-                <a href="#">Contact Us</a>
-                <a href="#">Help</a>
+                <a data-aos="fade-down" data-aos-duration="1500" href="./home.html">Home</a>
+                <a data-aos="fade-down" data-aos-duration="2000" href="./index.html">Voice to Text</a>
+                <a data-aos="fade-down" data-aos-duration="2500" href="./chatbot.html">ChatBot</a>
+                <a data-aos="fade-down" data-aos-duration="3000" href="./help.html">Help</a>
             </nav>
 
             <button class="sign-in">SIGNING IN</button>
 
         </header>
         <main>
-            <div class="content">
+            <div data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0"
+                data-aos-duration="3000" class="content">
                 <div class="tag-box">
-                    <div class="tag">INTRODUCING &wedbar;</div>
+                    <div class="tag">INTRODUCING EVA &wedbar;</div>
                 </div>
-                <h1>EMAIL FOR <br>DEVELOPERS</h1>
+                <h1>Your Everyday <br> Companion</h1>
 
                 <p class="discription">
                     This is our emotion bot which will be there for you and be like a friend for u during your good and
@@ -38,13 +39,19 @@
                 </p>
 
                 <div class="buttons">
-                    <a href="#" class="btn-start">Documentation &gt;</a>
-                    <a href="#" class="btn-get">Get Started &gt;</a>
+                    <a href="https://www.canva.com/design/DAG3DQegpiU/g-xrd7gRyKB032jqd8hLGg/edit?utm_content=DAG3DQegpiU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="btn-start">Documentation &gt;</a>
+                    <a href="bot.html" class="btn-get">Connect EVA &gt;</a>
 
                 </div>
             </div>
         </main>
+        <spline-viewer class="robot" url="https://prod.spline.design/k4MBvGZYTHhHnqlU/scene.splinecode"></spline-viewer>
     </div>
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.88/build/spline-viewer.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 
 </html>
