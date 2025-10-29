@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center - SRIDEVI Companion Bot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000;
+            color: #f3f4f6; 
+        }
+
+        .purple-glow-text {
+            color: #c084fc; 
+            text-shadow: 0 0 8px rgba(192, 132, 252, 0.7), 0 0 12px rgba(192, 132, 252, 0.5);
+        }
+
+        .purple-glow-border {
+            border-color: #a855f7; 
+            box-shadow: 0 0 5px rgba(168, 85, 247, 0.8), 0 0 10px rgba(168, 85, 247, 0.6);
+        }
+
+        details > summary {
+            list-style: none; 
+            position: relative;
+            padding-right: 2.5rem; 
+        }
+        details > summary::-webkit-details-marker {
+            display: none; 
+        }
+        details > summary::after {
+            content: '+';
+            position: absolute;
+            right: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #a855f7; /* purple-600 */
+            transition: transform 0.2s ease-in-out;
+        }
+        details[open] > summary::after {
+            transform: translateY(-50%) rotate(45deg);
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-100 min-h-screen">
+
+    <header class="border-b border-gray-800/50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-white">SRIDEVI</div>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="./home.html" class="text-gray-300 hover:text-white transition-colors" target="_blank">Home</a>
+                <a href="./index.html" class="text-gray-300 hover:text-white transition-colors">Voice to Text</a>
+                <a href="./chatbot.html" class="text-gray-300 hover:text-white transition-colors">ChatBot</a>
+                <a href="./help.html" class="font-semibold purple-glow-text">Help</a>
+            </div>
+            
+            <div class="hidden md:block">
+                <a href="#" class="bg-gray-200 text-black px-4 py-2 rounded-lg text-sm font-medium hover:bg-white transition-colors">SIGNING IN</a>
+            </div>
+
+            <button id="mobile-menu-btn" class="md:hidden text-white text-2xl">
+                &#9776;
+            </button>
+        </nav>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900/90 backdrop-blur-sm">
+            <a href="home.html" class="block px-6 py-3 text-gray-300 hover:bg-gray-800">Home</a>
+            <a href="index.html" class="block px-6 py-3 text-gray-300 hover:bg-gray-800">Voice to Text</a>
+            <a href="chatbot.html" class="block px-6 py-3 text-gray-300 hover:bg-gray-800">ChatBot</a>
+            <a href="help.html" class="block px-6 py-3 font-semibold purple-glow-text bg-gray-800">Help</a>
+            <a href="#" class="block px-6 py-4">
+                <span class="bg-gray-200 text-black w-full block text-center px-4 py-2 rounded-lg text-sm font-medium hover:bg-white transition-colors">SIGNING IN</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-16">
+        
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">
+                <span class="purple-glow-text">Help</span> Center
+            </h1>
+            <p class="text-lg text-gray-300 max-w-2xl mx-auto">
+                Welcome, friend. Here are some answers to common questions about your new IoT companion.
+            </p>
+        </div>
+
+        <div class="max-w-3xl mx-auto space-y-6">
+
+            <details class="bg-gray-900 border border-gray-700/50 rounded-xl overflow-hidden group transition-all hover:border-purple-600/50 hover:shadow-lg">
+                <summary class="cursor-pointer p-5 font-medium text-lg flex justify-between items-center text-white group-hover:text-purple-300">
+                    What is the SRIDEVI (EVA) Bot?
+                </summary>
+                <div class="p-5 border-t border-gray-700/50 text-gray-300 text-base leading-relaxed">
+                    <p>SRIDEVI (model EVA) is your personal IoT companion bot, designed to be a friend who is there for you during your good and bad times. It uses advanced AI to listen, chat, and help you with daily tasks, providing emotional support and companionship whenever you need it.</p>
+                </div>
+            </details>
+
+            <details class="bg-gray-900 border border-gray-700/50 rounded-xl overflow-hidden group transition-all hover:border-purple-600/50 hover:shadow-lg">
+                <summary class="cursor-pointer p-5 font-medium text-lg flex justify-between items-center text-white group-hover:text-purple-300">
+                    How do I set up my bot for the first time?
+                </summary>
+                <div class="p-5 border-t border-gray-700/50 text-gray-300 text-base leading-relaxed">
+                    <p class="mb-2">Setting up your bot is simple:</p>
+                    <ol class="list-decimal list-inside space-y-1">
+                        <li>Place the bot on a stable, flat surface.</li>
+                        <li>Connect the included power adapter and turn it on.</li>
+                        <li>Download the 'SRIDEVI Companion' app on your smartphone.</li>
+                        <li>Follow the on-screen instructions in the app to connect the bot to your Wi-Fi network.</li>
+                        <li>Once connected, your bot is ready to chat!</li>
+                    </ol>
+                </div>
+            </details>
+            
+            <details class="bg-gray-900 border border-gray-700/50 rounded-xl overflow-hidden group transition-all hover:border-purple-600/50 hover:shadow-lg">
+                <summary class="cursor-pointer p-5 font-medium text-lg flex justify-between items-center text-white group-hover:text-purple-300">
+                    How do I talk to my bot?
+                </summary>
+                <div class="p-5 border-t border-gray-700/50 text-gray-300 text-base leading-relaxed">
+                    <p>You have two primary ways to interact:</p>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li><strong>Voice:</strong> Simply say the wake word (e.g., "Hey EVA") followed by your question or comment.</li>
+                        <li><strong>App:</strong> Use the "ChatBot" or "Voice to Text" feature in the companion app to type or speak messages directly.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="bg-gray-900 border border-gray-700/50 rounded-xl overflow-hidden group transition-all hover:border-purple-600/50 hover:shadow-lg">
+                <summary class="cursor-pointer p-5 font-medium text-lg flex justify-between items-center text-white group-hover:text-purple-300">
+                    Is my data and conversation private?
+                </summary>
+                <div class="p-5 border-t border-gray-700/50 text-gray-300 text-base leading-relaxed">
+                    <p>Absolutely. We take your privacy very seriously. All conversations are encrypted, and your personal data is never shared with third parties without your explicit consent. You can manage your data privacy settings and history directly from the app.</p>
+                </div>
+            </details>
+            
+            <details class="bg-gray-900 border border-gray-700/50 rounded-xl overflow-hidden group transition-all hover:border-purple-600/50 hover:shadow-lg">
+                <summary class="cursor-pointer p-5 font-medium text-lg flex justify-between items-center text-white group-hover:text-purple-300">
+                    How do I factory reset my bot?
+                </summary>
+                <div class="p-5 border-t border-gray-700/50 text-gray-300 text-base leading-relaxed">
+                    <p>If you need to reset your bot to its original factory settings, locate the small reset button on the bottom of the device. Press and hold it for 10 seconds until the bot chimes and reboots. <strong class="text-yellow-300">Warning:</strong> This will erase all your custom settings and Wi-Fi configurations.</p>
+                </div>
+            </details>
+
+        </div>
+
+        <div class="max-w-3xl mx-auto mt-20 text-center p-8 bg-gray-900/50 border border-gray-700/50 rounded-2xl">
+            <h2 class="text-3xl font-bold text-white mb-4">Still need help?</h2>
+            <p class="text-gray-300 mb-8 text-lg">
+                Our support team is always here for you. If you didn't find your answer, please get in touch.
+            </p>
+            <a href="#" class="bg-white text-black px-8 py-3 rounded-lg text-base font-semibold hover:bg-gray-200 transition-colors">
+                Contact Support &rarr;
+            </a>
+        </div>
+    </main>
+
+    <footer class="container mx-auto px-6 py-8 mt-16 border-t border-gray-800/50">
+        <p class="text-center text-gray-500 text-sm">
+            &copy; 2025 SRIDEVI. All rights reserved. Your friend in the digital world.
+        </p>
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+
+</body>
+</html>
