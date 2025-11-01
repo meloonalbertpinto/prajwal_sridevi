@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Song Suggester</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Emotion Song Suggester</h1>
+        
+        <video id="webcam" autoplay playsinline></video>
+        
+        <canvas id="captureCanvas" style="display: none;"></canvas>
+
+        <div class="results">
+            <h2 id="emotion-label">Loading Webcam...</h2>
+            
+            <p id="song-suggestion"></p>
+        </div>
+    </div>
+    
+    <script src="/script.js"></script>
+</body>
+</html>
